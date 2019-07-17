@@ -1,0 +1,6 @@
+[submodule "app/src/main/cpp/engine"]
+	path = app/src/main/cpp/engine
+	url = git@github.com:canuc/meow-engine.git
+[submodule "app/src/main/assets"]
+	path = app/src/main/assets
+	url = git@github.com:canuc/coconuts-adventure-assets.git

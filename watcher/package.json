@@ -1,0 +1,14 @@
+{
+  "name": "watcher",
+  "version": "1.0.0",
+  "description": "Watcher to upload data",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.2.43"
+  }
+}

@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+def platformVersion = 18    //openGLES 3 min Version
+
+android {
+    compileSdkVersion = 18
+
+    defaultConfig {
+        minSdkVersion 18
+    }
+
+    defaultConfig.with {
+        applicationId = "com.coconutadventure.android"
+        minSdkVersion = 18
+        targetSdkVersion = 18
+        versionCode = 1
+        versionName = "1.0"
+
+        ndk {
+            abiFilters 'x86', 'armeabi-v7a'
+        }
+        externalNativeBuild {
+            cmake {
+                // pass command line arguments to cmake: our CMakeLists.txt needs it
+                // to load the right openGL lib (gles2 vs. gles3 )
+                // other ndk flags could also be configured there [cppFlags, cFlags...]
+                arguments "-DANDROID_PLATFORM_LEVEL=${platformVersion}",
+                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
+            }
+        }
+    }
+
+    compileOptions.with {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            //signingConfig = $.android.signingConfigs.get("release")
+        }
+        debug {
+            debuggable = true
+            applicationIdSuffix = ".debug"
+        }
+    }
+
+
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.amazonaws:aws-android-sdk-core:2.+'
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.+'
+}
+
